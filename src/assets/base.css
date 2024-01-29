@@ -1,0 +1,31 @@
+*,
+*::before,
+*::after {
+    position: relative;
+    box-sizing: border-box;
+    margin: 0;
+    font-weight: normal;
+}
+
+body {
+    font-family: 'Source Code Pro', sans-serif;
+    font-size: 15px;
+    text-rendering: optimizelegibility;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.card-title {
+    font-size: 1.8em;
+    font-weight: 500;
+}
+
+.card-subtitle {
+    font-size: 1.4em;
+    font-weight: 500;
+}
+
+.table-font {
+    font-size: 1.1em;
+}

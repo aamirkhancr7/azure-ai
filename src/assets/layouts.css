@@ -1,0 +1,62 @@
+.flex-display {
+    display: flex;
+}
+
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-space-around {
+    display: flex;
+    justify-content: space-around;
+}
+
+.flex-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.text-align-end {
+    text-align: end;
+}
+
+.label-color {
+    color: darkgrey;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+.grid-equal-space {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 6fr 6fr;
+}
+
+.grid-three-space {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 4fr 4fr 4fr;
+}
+
+.grid-four-space {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 3fr 3fr 3fr 3fr;
+}
+
+.center-div {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.flex-cloumn {
+    display: flex;
+    flex-direction: column;
+}
