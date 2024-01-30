@@ -3,16 +3,12 @@
     <q-input style="margin: 20px 0" dense outlined v-model="searchQuery" @update:model-value="getDocuments" />
     <div class="flex-right" style="padding: 20px 0">
       <q-pagination
-          v-model="current"
+          v-model="page"
           :max="maxValues"
           direction-links
           @update:model-value="getDocuments"
           boundary-numbers
           :max-pages="10"
-          icon-first="skip_previous"
-          icon-last="skip_next"
-          icon-prev="fast_rewind"
-          icon-next="fast_forward"
       />
     </div>
     <div class="grid-four-space">
@@ -35,7 +31,8 @@ export default {
   },
   data() {
     return {
-      current: 0,
+      page: 1,
+      itemsPerPage: 48,
       maxValues: null,
       searchQuery: '',
       searchResults: [],
@@ -45,7 +42,7 @@ export default {
   methods: {
     async getDocuments() {
       try {
-        const data = {"count":true,"orderby":"","skip": this.current,"top":20,"searchMode":"any","queryType":"simple","facets":["BillingDraw,values:0|1000000","TotalORDraw,values:0|1000000","EstBillingEff,values:0|100","BillingSale,values:0|1000000","EstBillingSale,values:0|1000000","Magazine_Category_Rollup,count:5,sort:count","TotalORSale,values:0|1000000","magazine_frequency_Description,count:5,sort:count","Publisher_Name,count:5,sort:count","magazine_format_Description,count:5,sort:count","Magazine_category_description,count:5,sort:count"],"filter":"","search": this.searchQuery }
+        const data = {"count":true,"orderby":"BillingDraw desc","skip": this.page * this.itemsPerPage - this.itemsPerPage,"top":this.itemsPerPage,"searchMode":"any","queryType":"simple","facets":["BillingDraw,values:0|1000000","TotalORDraw,values:0|1000000","EstBillingEff,values:0|100","BillingSale,values:0|1000000","EstBillingSale,values:0|1000000","Magazine_Category_Rollup,count:5,sort:count","TotalORSale,values:0|1000000","magazine_frequency_Description,count:5,sort:count","Publisher_Name,count:5,sort:count","magazine_format_Description,count:5,sort:count","Magazine_category_description,count:5,sort:count"],"filter":"","search": this.searchQuery }
         const response = await axios.post(this.searchEndpoint,data, {
           headers: {
             'Content-Type': 'application/json',
@@ -53,7 +50,7 @@ export default {
           },
         });
         this.searchResults = response.data.value;
-        this.maxValues = response.data['@odata.count']
+        this.maxValues = Math.ceil(response.data['@odata.count'] / this.itemsPerPage)
         console.log(this.searchResults);
       } catch (e) {
         console.log(e);
