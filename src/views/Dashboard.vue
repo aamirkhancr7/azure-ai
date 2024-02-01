@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 20px">
+  <div style="padding: 20px" v-if="searchResults.length">
     <q-input label="Search...." style="margin: 20px 0" dense outlined v-model="searchQuery" @update:model-value="getDocuments" />
     <div>
       <div style="padding: 5px 0 15px 0">Filters</div>
@@ -18,8 +18,8 @@
               @update:model-value="getDocuments"
               style="margin: 10px"
           >
-            <template #selected-item="scope">
-              <q-chip dense>{{ scope.opt.label }} ({{ scope.opt.count }})</q-chip>
+            <template #selected-item="{ opt, toggleOption }">
+              <q-chip @remove="toggleOption(opt)" removable dense>{{ opt.label }} ({{ opt.count }})</q-chip>
             </template>
             <template #option="{ itemProps, opt, selected, toggleOption }">
               <q-item v-bind="itemProps">
@@ -49,8 +49,8 @@
               @update:model-value="getDocuments"
               style="margin: 10px"
           >
-            <template #selected-item="scope">
-              <q-chip dense>{{ scope.opt.label }} ({{ scope.opt.count }})</q-chip>
+            <template #selected-item="{ opt, toggleOption }">
+              <q-chip @remove="toggleOption(opt)" removable dense>{{ opt.label }} ({{ opt.count }})</q-chip>
             </template>
             <template #option="{ itemProps, opt, selected, toggleOption }">
               <q-item v-bind="itemProps">
@@ -80,8 +80,8 @@
               @update:model-value="getDocuments"
               style="margin: 10px"
           >
-            <template #selected-item="scope">
-              <q-chip dense>{{ scope.opt.label }} ({{ scope.opt.count }})</q-chip>
+            <template #selected-item="{ opt, toggleOption }">
+              <q-chip @remove="toggleOption(opt)" removable dense>{{ opt.label }} ({{ opt.count }})</q-chip>
             </template>
             <template #option="{ itemProps, opt, selected, toggleOption }">
               <q-item v-bind="itemProps">
@@ -111,8 +111,8 @@
               @update:model-value="getDocuments"
               style="margin: 10px"
           >
-            <template #selected-item="scope">
-              <q-chip dense>{{ scope.opt.label }} ({{ scope.opt.count }})</q-chip>
+            <template #selected-item="{ opt, toggleOption }">
+              <q-chip @remove="toggleOption(opt)" removable dense>{{ opt.label }} ({{ opt.count }})</q-chip>
             </template>
             <template #option="{ itemProps, opt, selected, toggleOption }">
               <q-item v-bind="itemProps">
@@ -142,8 +142,8 @@
               @update:model-value="getDocuments"
               style="margin: 10px"
           >
-            <template #selected-item="scope">
-              <q-chip dense>{{ scope.opt.label }} ({{ scope.opt.count }})</q-chip>
+            <template #selected-item="{ opt, toggleOption }">
+              <q-chip @remove="toggleOption(opt)" removable dense>{{ opt.label }} ({{ opt.count }})</q-chip>
             </template>
             <template #option="{ itemProps, opt, selected, toggleOption }">
               <q-item v-bind="itemProps">
@@ -182,6 +182,9 @@
           </div>
           <div>{{ result.Title_Name }} </div>
         </q-card>
+        <q-inner-loading :showing="loading">
+          <q-spinner-gears size="200px" color="primary" />
+        </q-inner-loading>
       </div>
     </div>
     <div style="padding: 10px 0 40px 0; display: grid; justify-content: flex-end">
@@ -198,6 +201,9 @@
       <div class="flex-right" style="padding-top: 20px;font-weight: 500">Total items ({{ totalItems }})</div>
     </div>
   </div>
+  <q-inner-loading :showing="loading">
+    <q-spinner-gears size="50px" color="primary" />
+  </q-inner-loading>
 </template>
 
 <script>
@@ -210,6 +216,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       page: 1,
       itemsPerPage: 48,
       totalItems: 0,
@@ -257,8 +264,6 @@ export default {
       this.magazine.filterValue = foundFilter ? constructCondition(filterMapping[foundFilter], this.magazine.filters[foundFilter]) : '';
 
       function applyFilter(...filterKeys) {
-        console.log('Filter keys:', filterKeys);
-
         const { filters } = this.magazine;
         const conditions = filterKeys.map(key => constructCondition(filterMapping[key], filters[key]));
 
@@ -303,6 +308,7 @@ export default {
 
     },
     async getDocuments() {
+      this.loading = true
       try {
         if (Object.values(this.magazine.filters).some(filter => filter.length)) {
           await this.filterProperties();
@@ -351,6 +357,7 @@ export default {
       } catch (e) {
         console.log(e);
       }
+      this.loading = false
     },
   },
 }
