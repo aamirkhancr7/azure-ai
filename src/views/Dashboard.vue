@@ -1,116 +1,201 @@
 <template>
   <div style="padding: 20px">
-    <q-input style="margin: 20px 0" dense outlined v-model="searchQuery" @update:model-value="getDocuments" />
-    <div class="flex-right" style="padding: 20px 0">
-      <q-pagination
-          v-model="page"
-          :max="maxValues"
-          direction-links
-          @update:model-value="getDocuments"
-          boundary-numbers
-          :max-pages="10"
-      />
-    </div>
-    <div style="display: grid; grid-gap: 10px; grid-template-columns: 3fr 9fr">
-      <div>
+    <q-input label="Search...." style="margin: 20px 0" dense outlined v-model="searchQuery" @update:model-value="getDocuments" />
+    <div>
+      <div style="padding: 5px 0 15px 0">Filters</div>
+      <div style="display: grid; grid-gap: 10px; grid-template-columns: 2fr 2fr 2fr 2fr 2fr">
         <div v-if="selection.filters.publisherName.length > 0">
-          <div>
-            Publisher Name
-          </div>
-          <q-option-group
+          <div style="margin: 0 10px">Publisher Name</div>
+          <q-select
+              dense
+              use-chips
+              outlined
               v-model="magazine.filters.publisherName"
               :options="selection.filters.publisherName"
-              color="green"
-              type="checkbox"
+              multiple
+              emit-value
+              map-options
               @update:model-value="getDocuments"
+              style="margin: 10px"
           >
-            <template #label="opt">
-              <span>{{ opt.label }}</span>
-              <span style="padding-left: 8px">({{ opt.count }})</span>
+            <template #selected-item="scope">
+              <q-chip dense>{{ scope.opt.label }} ({{ scope.opt.count }})</q-chip>
             </template>
-          </q-option-group>
+            <template #option="{ itemProps, opt, selected, toggleOption }">
+              <q-item v-bind="itemProps">
+                <q-item-section side>
+                  <q-checkbox :model-value="selected" @update:model-value="toggleOption(opt)" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>
+                    {{ opt.label }} ({{ opt.count }})
+                  </q-item-label>
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
         </div>
-        <q-separator style="margin: 10px 0" />
         <div v-if="selection.filters.magazineCategoryDescription.length > 0">
-          <div>
-            Magazine category description
-          </div>
-          <q-option-group
+          <div style="margin: 0 10px">Magazine category description</div>
+          <q-select
+              dense
+              use-chips
+              outlined
               v-model="magazine.filters.magazineCategoryDescription"
               :options="selection.filters.magazineCategoryDescription"
-              color="green"
-              type="checkbox"
+              multiple
+              emit-value
+              map-options
               @update:model-value="getDocuments"
+              style="margin: 10px"
           >
-            <template #label="opt">
-              <span>{{ opt.label }}</span>
-              <span style="padding-left: 8px">({{ opt.count }})</span>
+            <template #selected-item="scope">
+              <q-chip dense>{{ scope.opt.label }} ({{ scope.opt.count }})</q-chip>
             </template>
-          </q-option-group>
+            <template #option="{ itemProps, opt, selected, toggleOption }">
+              <q-item v-bind="itemProps">
+                <q-item-section side>
+                  <q-checkbox :model-value="selected" @update:model-value="toggleOption(opt)" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>
+                    {{ opt.label }} ({{ opt.count }})
+                  </q-item-label>
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
         </div>
-        <q-separator style="margin: 10px 0" />
         <div v-if="selection.filters.magazineFormatDescription.length > 0">
-          <div>
-            Magazine format description
-          </div>
-          <q-option-group
+          <div style="margin: 0 10px">Magazine format description</div>
+          <q-select
+              dense
+              use-chips
+              outlined
               v-model="magazine.filters.magazineFormatDescription"
               :options="selection.filters.magazineFormatDescription"
-              color="green"
-              type="checkbox"
+              multiple
+              emit-value
+              map-options
               @update:model-value="getDocuments"
+              style="margin: 10px"
           >
-            <template #label="opt">
-              <span>{{ opt.label }}</span>
-              <span style="padding-left: 8px">({{ opt.count }})</span>
+            <template #selected-item="scope">
+              <q-chip dense>{{ scope.opt.label }} ({{ scope.opt.count }})</q-chip>
             </template>
-          </q-option-group>
+            <template #option="{ itemProps, opt, selected, toggleOption }">
+              <q-item v-bind="itemProps">
+                <q-item-section side>
+                  <q-checkbox :model-value="selected" @update:model-value="toggleOption(opt)" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>
+                    {{ opt.label }} ({{ opt.count }})
+                  </q-item-label>
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
         </div>
-        <q-separator style="margin: 10px 0" />
         <div v-if="selection.filters.magazineFrequencyDescription.length > 0">
-          <div>
-            Magazine frequency description
-          </div>
-          <q-option-group
+          <div style="margin: 0 10px">Magazine frequency description</div>
+          <q-select
+              dense
+              use-chips
+              outlined
               v-model="magazine.filters.magazineFrequencyDescription"
               :options="selection.filters.magazineFrequencyDescription"
-              color="green"
-              type="checkbox"
+              multiple
+              emit-value
+              map-options
               @update:model-value="getDocuments"
+              style="margin: 10px"
           >
-            <template #label="opt">
-              <span>{{ opt.label }}</span>
-              <span style="padding-left: 8px">({{ opt.count }})</span>
+            <template #selected-item="scope">
+              <q-chip dense>{{ scope.opt.label }} ({{ scope.opt.count }})</q-chip>
             </template>
-          </q-option-group>
+            <template #option="{ itemProps, opt, selected, toggleOption }">
+              <q-item v-bind="itemProps">
+                <q-item-section side>
+                  <q-checkbox :model-value="selected" @update:model-value="toggleOption(opt)" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>
+                    {{ opt.label }} ({{ opt.count }})
+                  </q-item-label>
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
         </div>
-        <q-separator style="margin: 10px 0" />
-        <div>
-          <div>
-            Magazine category rollup
-          </div>
-          <q-option-group
+        <div v-if="selection.filters.magazineCategoryRollup.length > 0">
+          <div style="margin: 0 10px">Magazine category rollup</div>
+          <q-select
+              use-chips
+              outlined
+              dense
               v-model="magazine.filters.magazineCategoryRollup"
               :options="selection.filters.magazineCategoryRollup"
-              color="green"
-              type="checkbox"
+              multiple
+              emit-value
+              map-options
               @update:model-value="getDocuments"
+              style="margin: 10px"
           >
-            <template #label="opt">
-              <span>{{ opt.label }}</span>
-              <span style="padding-left: 8px">({{ opt.count }})</span>
+            <template #selected-item="scope">
+              <q-chip dense>{{ scope.opt.label }} ({{ scope.opt.count }})</q-chip>
             </template>
-          </q-option-group>
+            <template #option="{ itemProps, opt, selected, toggleOption }">
+              <q-item v-bind="itemProps">
+                <q-item-section side>
+                  <q-checkbox :model-value="selected" @update:model-value="toggleOption(opt)" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>
+                    {{ opt.label }} ({{ opt.count }})
+                  </q-item-label>
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
         </div>
       </div>
-      <div class="grid-four-space">
+    </div>
+    <div style="padding: 20px 0 40px 0; display: grid; justify-content: flex-end">
+      <div style="padding-top: 20px">
+        <q-pagination
+            v-model="page"
+            :max="maxValues"
+            direction-links
+            @update:model-value="getDocuments"
+            boundary-numbers
+            :max-pages="10"
+        />
+      </div>
+      <div class="flex-right" style="padding-top: 20px;font-weight: 500">Total items ({{ totalItems }})</div>
+    </div>
+    <div>
+      <div style="display: grid; grid-gap: 10px; grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr">
         <q-card flat style="margin: 10px" v-for="result in searchResults" :key="result.Issue_ID">
           <div>
-            <img :src="result.CoverImageURL" style="width: 200px; height: 270px" />
+            <img :src="result.CoverImageURL" style="width: 190px; height: 270px" />
           </div>
           <div>{{ result.Title_Name }} </div>
         </q-card>
       </div>
+    </div>
+    <div style="padding: 10px 0 40px 0; display: grid; justify-content: flex-end">
+      <div style="padding-top: 20px">
+        <q-pagination
+            v-model="page"
+            :max="maxValues"
+            direction-links
+            @update:model-value="getDocuments"
+            boundary-numbers
+            :max-pages="10"
+        />
+      </div>
+      <div class="flex-right" style="padding-top: 20px;font-weight: 500">Total items ({{ totalItems }})</div>
     </div>
   </div>
 </template>
@@ -127,6 +212,7 @@ export default {
     return {
       page: 1,
       itemsPerPage: 48,
+      totalItems: 0,
       maxValues: null,
       searchQuery: '',
       searchResults: [],
@@ -242,6 +328,7 @@ export default {
         });
         this.searchResults = response.data.value;
         this.maxValues = Math.ceil(response.data['@odata.count'] / this.itemsPerPage)
+        this.totalItems = response.data['@odata.count']
         // Filter Mapping
         const filterMapping = {
           publisherName: 'Publisher_Name',
