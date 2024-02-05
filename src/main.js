@@ -1,7 +1,8 @@
 import { createApp } from 'vue';
 import { Quasar, Notify } from 'quasar';
 import App from './App.vue'
-
+import router from './router';
+import { store } from './store';
 // Import icon libraries
 import '@quasar/extras/roboto-font/roboto-font.css';
 import '@quasar/extras/material-icons/material-icons.css';
@@ -27,5 +28,8 @@ app.use(Quasar, {
         Notify,
     },
 });
+
+app.use(router);
+app.use(store);
 
 app.mount('#app');

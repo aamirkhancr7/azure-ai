@@ -1,0 +1,11 @@
+{
+    "admin": {
+        "routes": ["dashboard"],
+        "actions": [
+            {
+                "name": "",
+                "description": ""
+            }
+        ]
+    }
+}

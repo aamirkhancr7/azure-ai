@@ -1,8 +1,8 @@
 <template>
   <div style="padding: 20px">
     <q-input label="Search...." style="margin: 20px 0" dense outlined v-model="searchQuery" @update:model-value="getDocuments" />
-    <div>
-      <div style="padding: 5px 0 15px 0">Filters</div>
+    <div style="background: #F5F5F5; border-radius: 10px; padding: 10px">
+      <div style="padding: 5px 0 15px 0; font-weight: 500; font-size: 1rem">Filters</div>
       <div style="display: grid; grid-gap: 10px; grid-template-columns: 2fr 2fr 2fr 2fr 2fr">
         <div v-if="selection.filters.publisherName.length > 0">
           <div style="margin: 0 10px">Publisher Name</div>
@@ -16,7 +16,7 @@
               emit-value
               map-options
               @update:model-value="getDocuments"
-              style="margin: 10px"
+              style="margin: 10px; background: #ffffff"
           >
             <template #selected-item="{ opt, toggleOption }">
               <q-chip @remove="toggleOption(opt)" removable dense>{{ opt.label }} ({{ opt.count }})</q-chip>
@@ -47,7 +47,7 @@
               emit-value
               map-options
               @update:model-value="getDocuments"
-              style="margin: 10px"
+              style="margin: 10px;background: #ffffff"
           >
             <template #selected-item="{ opt, toggleOption }">
               <q-chip @remove="toggleOption(opt)" removable dense>{{ opt.label }} ({{ opt.count }})</q-chip>
@@ -78,7 +78,7 @@
               emit-value
               map-options
               @update:model-value="getDocuments"
-              style="margin: 10px"
+              style="margin: 10px; background: #ffffff"
           >
             <template #selected-item="{ opt, toggleOption }">
               <q-chip @remove="toggleOption(opt)" removable dense>{{ opt.label }} ({{ opt.count }})</q-chip>
@@ -109,7 +109,7 @@
               emit-value
               map-options
               @update:model-value="getDocuments"
-              style="margin: 10px"
+              style="margin: 10px; background: #ffffff"
           >
             <template #selected-item="{ opt, toggleOption }">
               <q-chip @remove="toggleOption(opt)" removable dense>{{ opt.label }} ({{ opt.count }})</q-chip>
@@ -140,7 +140,7 @@
               emit-value
               map-options
               @update:model-value="getDocuments"
-              style="margin: 10px"
+              style="margin: 10px; background: #ffffff"
           >
             <template #selected-item="{ opt, toggleOption }">
               <q-chip @remove="toggleOption(opt)" removable dense>{{ opt.label }} ({{ opt.count }})</q-chip>
@@ -161,7 +161,8 @@
         </div>
       </div>
     </div>
-    <div style="padding: 20px 0 40px 0; display: grid; justify-content: flex-end">
+    <div style="padding: 20px 0 20px 0; display: grid; justify-content: flex-end">
+      <div class="flex-right" style="padding-top: 20px;font-weight: 500">Total items ({{ totalItems }})</div>
       <div style="padding-top: 20px">
         <q-pagination
             v-model="page"
@@ -172,11 +173,10 @@
             :max-pages="10"
         />
       </div>
-      <div class="flex-right" style="padding-top: 20px;font-weight: 500">Total items ({{ totalItems }})</div>
     </div>
-    <div>
+    <div style="background: #F5F5F5; border-radius: 10px; padding: 15px 5px">
       <div style="display: grid; grid-gap: 10px; grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr">
-        <q-card flat style="margin: 10px" v-for="result in searchResults" :key="result.Issue_ID">
+        <q-card flat style="margin: 10px;background: #F5F5F5" v-for="result in searchResults" :key="result.Issue_ID">
           <div>
             <img :src="result.CoverImageURL" style="width: 190px; height: 270px" />
           </div>

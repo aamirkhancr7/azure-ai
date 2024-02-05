@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@azure/msal-browser': ^2.30.0
   '@quasar/extras': ^1.16.9
   '@quasar/vite-plugin': ^1.6.0
   '@vitejs/plugin-vue': ^4.5.2
@@ -11,14 +12,19 @@ specifiers:
   vite: ^5.0.8
   vite-plugin-webpackchunkname: ^1.0.1
   vue: ^3.3.11
+  vue-router: ^4.2.5
+  vuex: ^4.1.0
 
 dependencies:
+  '@azure/msal-browser': 2.38.3
   '@quasar/extras': 1.16.9
   axios: 1.6.7
   quasar: 2.14.3
   rollup-plugin-visualizer: 5.12.0
   vite-plugin-webpackchunkname: 1.0.1
   vue: 3.4.15
+  vue-router: 4.2.5_vue@3.4.15
+  vuex: 4.1.0_vue@3.4.15
 
 devDependencies:
   '@quasar/vite-plugin': 1.6.0_phztrlde624xq7iusg6eofmwxi
@@ -27,6 +33,19 @@ devDependencies:
   vite: 5.0.12_sass@1.70.0
 
 packages:
+
+  /@azure/msal-browser/2.38.3:
+    resolution: {integrity: sha512-2WuLFnWWPR1IdvhhysT18cBbkXx1z0YIchVss5AwVA95g7CU5CpT3d+5BcgVGNXDXbUU7/5p0xYHV99V5z8C/A==}
+    engines: {node: '>=0.8.0'}
+    deprecated: A newer major version of this library is available. Please upgrade to the latest available version.
+    dependencies:
+      '@azure/msal-common': 13.3.1
+    dev: false
+
+  /@azure/msal-common/13.3.1:
+    resolution: {integrity: sha512-Lrk1ozoAtaP/cp53May3v6HtcFSVxdFrg2Pa/1xu5oIvsIwhxW6zSPibKefCOVgd5osgykMi5jjcZHv8XkzZEQ==}
+    engines: {node: '>=0.8.0'}
+    dev: false
 
   /@babel/helper-string-parser/7.23.4:
     resolution: {integrity: sha512-803gmbQdqwdf4olxrX4AJyFBV/RTr3rSmOj0rKwesmzlfhYNDEs+/iOcznzpNWlJlIlTJC2QfPFcHB6DlzdVLQ==}
@@ -457,6 +476,10 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.4.15
       '@vue/shared': 3.4.15
+
+  /@vue/devtools-api/6.5.1:
+    resolution: {integrity: sha512-+KpckaAQyfbvshdDW5xQylLni1asvNSGme1JFs8I1+/H5pHEhqUKMEQD/qn3Nx5+/nycBq11qAEi8lk+LXI2dA==}
+    dev: false
 
   /@vue/reactivity/3.4.15:
     resolution: {integrity: sha512-55yJh2bsff20K5O84MxSvXKPHHt17I2EomHznvFiJCAZpJTNW8IuLj1xZWMLELRhBK3kkFV/1ErZGHJfah7i7w==}
@@ -941,6 +964,15 @@ packages:
       fsevents: 2.3.3
     dev: true
 
+  /vue-router/4.2.5_vue@3.4.15:
+    resolution: {integrity: sha512-DIUpKcyg4+PTQKfFPX88UWhlagBEBEfJ5A8XDXRJLUnZOvcpMF8o/dnL90vpVkGaPbjvXazV/rC1qBKrZlFugw==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.5.1
+      vue: 3.4.15
+    dev: false
+
   /vue/3.4.15:
     resolution: {integrity: sha512-jC0GH4KkWLWJOEQjOpkqU1bQsBwf4R1rsFtw5GQJbjHVKWDzO6P0nWWBTmjp1xSemAioDFj1jdaK1qa3DnMQoQ==}
     peerDependencies:
@@ -954,6 +986,15 @@ packages:
       '@vue/runtime-dom': 3.4.15
       '@vue/server-renderer': 3.4.15_vue@3.4.15
       '@vue/shared': 3.4.15
+
+  /vuex/4.1.0_vue@3.4.15:
+    resolution: {integrity: sha512-hmV6UerDrPcgbSy9ORAtNXDr9M4wlNP4pEFKye4ujJF8oqgFFuxDCdOLS3eNoRTtq5O3hoBDh9Doj1bQMYHRbQ==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.5.1
+      vue: 3.4.15
+    dev: false
 
   /wrap-ansi/7.0.0:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
