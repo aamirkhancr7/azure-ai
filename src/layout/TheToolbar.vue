@@ -19,7 +19,7 @@ export default {
   name: "TheToolbar",
   methods: {
     logout() {
-      return MSALInstance.logout();f
+      return MSALInstance.logout();
     },
   }
 }
