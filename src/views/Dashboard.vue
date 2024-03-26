@@ -230,7 +230,8 @@ export default {
       maxValues: null,
       searchQuery: '',
       searchResults: [],
-      searchEndpoint: `https://${import.meta.env.VITE_APP_SERVICE_NAME}.search.windows.net/indexes/${import.meta.env.VITE_APP_INDEX_NAME}/docs/search?api-version=${import.meta.env.VITE_APP_API_VERSION}`,
+      searchEndpoint: `https://search-develop-1.search.windows.net/indexes/azuresql-index-magaine-items/docs/search?api-version=2016-09-01`,
+      // searchEndpoint: `https://${import.meta.env.VITE_APP_SERVICE_NAME}.search.windows.net/indexes/${import.meta.env.VITE_APP_INDEX_NAME}/docs/search?api-version=${import.meta.env.VITE_APP_API_VERSION}`,
       magazine: {
         filterValue: '',
         filters: {
@@ -344,7 +345,8 @@ export default {
         const response = await axios.post(this.searchEndpoint,data, {
           headers: {
             'Content-Type': 'application/json',
-            'api-key': `${import.meta.env.VITE_APP_API_KEY}`,
+            'api-key': `h1Dn7YmXNfUjLtdw7d5VApVXliYls3NzWkHyEOBTO8AzSeArEco0`,
+            // 'api-key': `${import.meta.env.VITE_APP_API_KEY}`,
           },
         });
         this.searchResults = response.data.value;
